@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Create from "./pages/Create";
+
 function App() {
     const [breads, setBreads] = useState("");
 
@@ -14,9 +16,11 @@ function App() {
 
     return (
         <>
-            <div>
-                <h1>bread: {breads}</h1>
-            </div>
+            <main className="bg-slate-100 flex justify-center items-center my-5 py-5">
+                <div>
+                    <Create />
+                </div>
+            </main>
         </>
     );
 }

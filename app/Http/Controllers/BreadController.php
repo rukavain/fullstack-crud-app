@@ -12,7 +12,7 @@ class BreadController extends Controller
      */
     public function index()
     {
-        return Bread::orderBy('DESC', 'created_at')->paginate(5);
+        return Bread::all();
     }
 
     /**
@@ -21,9 +21,9 @@ class BreadController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'price' => 'required|numeric|min:1|max:5',
             'title' => 'required|min:3|max:255',
-            'description' => 'required|min:12|max:455',
+            'description' => 'required|min:3|max:255',
+            'price' => 'required|numeric|max:5',
             'stocks' => 'required|numeric'
         ]);
 

@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
 Route::get('/breads', [BreadController::class, 'index']);
 Route::post('/breads', [BreadController::class, 'store']);
