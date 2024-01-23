@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bread;
 
 class BreadController extends Controller
 {
@@ -11,7 +12,7 @@ class BreadController extends Controller
      */
     public function index()
     {
-        //
+        return Bread::all();
     }
 
     /**
@@ -19,7 +20,16 @@ class BreadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'price' => 'required|numeric|min:1|max:5',
+            'title' => 'required|min:3|max:255',
+            'description' => 'required|min:12|max:455',
+            'stocks' => 'required|numeric'
+        ]);
+
+        Bread::create($request->all());
+
+        return response()->json(['info' => 'stored successfully']);
     }
 
     /**
