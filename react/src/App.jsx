@@ -8,7 +8,6 @@ function App() {
             .get("http://localhost:8000/api/breads")
             .then((response) => {
                 setBreads(response.data.message);
-                console.log(response.data);
             })
             .catch((error) => console.error("shiehs error par", error));
     }, []);
