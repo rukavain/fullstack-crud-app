@@ -12,7 +12,8 @@ class BreadController extends Controller
      */
     public function index()
     {
-        return Bread::all();
+        // return Bread::all();
+        return response()->json(['message' => 'bogos binted']);
     }
 
     /**
