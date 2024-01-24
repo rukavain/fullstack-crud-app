@@ -1,91 +1,122 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import React, { useState } from "react";
 import axios from "axios";
-import SuccessMessage from "../components/SuccessMessage";
+import Input from "../components/Input.jsx";
+import Button from "../components/Button.jsx";
 
-const Create = () => {
+const CreateBreadForm = () => {
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [stocks, setStocks] = useState("");
-    const [description, setDescription] = useState("");
+    const [image, setImage] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
 
-    const createBread = (event) => {
-        event.preventDefault();
-        const data = {
-            title: title,
-            description: description,
-            price: price,
-            stocks: stocks,
-        };
+    const handleFileChange = (e) => {
+        setImage(e.target.files[0]);
+    };
 
-        axios
-            .post("http://localhost:8000/api/breads", data)
-            .then((response) => {
-                console.log("added song saksesfully", response.data);
-                setSuccessMessage("added successfully");
-            })
-            .catch((error) => {
-                console.error("error plz fix.", error);
-                setSuccessMessage("error adding pls fix");
-            });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("price", price);
+        formData.append("stocks", stocks);
+        formData.append("image", image);
+
+        try {
+            const response = await axios.post(
+                "http://localhost:8000/api/breads",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+
+            console.log(response.data);
+            setSuccessMessage("Successfully added.");
+            // Handle success, reset form, show success message, etc.
+        } catch (error) {
+            console.error("Error creating bread:", error);
+            setSuccessMessage("Error adding. Please check inputs carefully.");
+            // Handle error, show error message, etc.
+        }
     };
 
     return (
-        <>
-            {successMessage && (
-                <SuccessMessage
-                    message={successMessage}
-                    hide={setSuccessMessage}
+        <div className="flex justify-center items-center my-8">
+            <form
+                className="flex flex-col bg-white px-8 py-4 rounded-md shadow-md"
+                onSubmit={handleSubmit}
+            >
+                {successMessage && (
+                    <h1
+                        onClick={() => setSuccessMessage("")}
+                        className="bg-slate-100 py-2 px-4 rounded-md cursor-pointer"
+                    >
+                        {successMessage}
+                    </h1>
+                )}
+                {/* <label>Title:</label>
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                /> */}
+                <Input
+                    type={"text"}
+                    label={"Title"}
+                    value={title}
+                    onChangeValue={setTitle}
                 />
-            )}
-            <form>
-                <div>
-                    <h1>Title</h1>
-                    <Input
-                        type={"text"}
-                        placeholder={"Bread"}
-                        value={title}
-                        onChangeValue={setTitle}
-                    />
-                </div>
-                <div>
-                    <h1>Description</h1>
-                    <Input
-                        type={"text"}
-                        value={description}
-                        onChangeValue={setDescription}
-                        placeholder={"Very delicious bread"}
-                    />
-                </div>
-                <div>
-                    <h1>Price</h1>
-                    <Input
-                        type={"text"}
-                        placeholder={"$2.99"}
-                        onChangeValue={setPrice}
-                        value={price}
-                    />
-                </div>
-                <div>
-                    <h1>Stocks</h1>
-                    <Input
-                        type={"text"}
-                        placeholder={"59"}
-                        value={stocks}
-                        onChangeValue={setStocks}
-                    />
-                </div>
-                <Button
-                    name={"Add bread"}
-                    bg={`green`}
-                    type={"submit"}
-                    onClick={createBread}
+                {/* <label>Description:</label>
+                <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                /> */}
+                <Input
+                    type={"text"}
+                    label={"Description"}
+                    value={description}
+                    onChangeValue={setDescription}
                 />
+                {/* <label>Price:</label>
+                <input
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                /> */}
+                <Input
+                    type={"number"}
+                    label={"Price"}
+                    value={price}
+                    onChangeValue={setPrice}
+                />
+                {/* <label>Stocks:</label>
+                <input
+                    type="number"
+                    value={stocks}
+                    onChange={(e) => setStocks(e.target.value)}
+                /> */}
+                <Input
+                    type={"number"}
+                    label={"Stocks"}
+                    value={stocks}
+                    onChangeValue={setStocks}
+                />
+                <label className="font-semibold">Image:</label>
+                <div className="flex flex-col justify-center items-start shadow-md rounded-md py-2 px-2">
+                    <input type="file" onChange={handleFileChange} />
+                </div>
+
+                <Button type={"submit"} name={"Submit"} />
+                {/* <button type="submit">Submit</button> */}
             </form>
-        </>
+        </div>
     );
 };
-export default Create;
+
+export default CreateBreadForm;

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Create from "./pages/Create";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import View from "./pages/View";
+import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
     const [breads, setBreads] = useState("");
@@ -16,11 +21,19 @@ function App() {
 
     return (
         <>
-            <main className="bg-slate-100 flex justify-center items-center my-5 py-5">
-                <div>
-                    <Create />
-                </div>
-            </main>
+            <nav className="flex justify-center items-center shadow-lg z-10 bg-white ">
+                <Navbar />
+            </nav>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/viewAll" element={<View />}></Route>
+                    <Route path="/create" element={<Create />}></Route>
+                </Routes>
+            </Router>
+            <footer>
+                <Footer />
+            </footer>
         </>
     );
 }

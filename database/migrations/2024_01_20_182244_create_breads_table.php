@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('breads', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
-            $table->float('price');
+            $table->text('description');
+            $table->integer('price');
             $table->integer('stocks');
-            // $table->longText('image');
+            $table->string('image')->nullable;
             $table->timestamps();
         });
     }

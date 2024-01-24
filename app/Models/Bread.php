@@ -13,6 +13,7 @@ class Bread extends Model
         'title',
         'description',
         'price',
-        'stocks'
+        'stocks',
+        'image'
     ];
 }

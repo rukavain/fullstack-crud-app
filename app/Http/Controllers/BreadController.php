@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bread;
+use Illuminate\Validation\Rule;
 
 class BreadController extends Controller
 {
@@ -12,7 +13,9 @@ class BreadController extends Controller
      */
     public function index()
     {
-        return Bread::all();
+        $breads = Bread::all();
+
+        return response()->json($breads);
     }
 
     /**
@@ -20,16 +23,26 @@ class BreadController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:3|max:255',
-            'price' => 'required|numeric|max:5',
-            'stocks' => 'required|numeric'
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|integer|min:0',
+            'stocks' => 'required|integer|min:0',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable',
         ]);
 
-        Bread::create($request->all());
+        $data = $request->all();
 
-        return response()->json(['info' => 'stored successfully']);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['image'] = 'images/' . $imageName;
+        }
+
+        $bread = Bread::create($data);
+
+        return response()->json(['message' => 'Bread created successfully', 'bread' => $bread], 201);
     }
 
     /**
