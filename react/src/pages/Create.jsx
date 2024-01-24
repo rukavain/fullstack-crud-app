@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import axios from "axios";
+import SuccessMessage from "../components/SuccessMessage";
 
 const Create = () => {
     const [title, setTitle] = useState("");
@@ -34,7 +35,12 @@ const Create = () => {
 
     return (
         <>
-            {successMessage && <h1>{successMessage}</h1>}
+            {successMessage && (
+                <SuccessMessage
+                    message={successMessage}
+                    hide={setSuccessMessage}
+                />
+            )}
             <form>
                 <div>
                     <h1>Title</h1>
@@ -72,14 +78,12 @@ const Create = () => {
                         onChangeValue={setStocks}
                     />
                 </div>
-                <button
-                    className="py-2 px-4 rounded-md shadow-md"
-                    type="submit"
+                <Button
+                    name={"Add bread"}
+                    bg={`green`}
+                    type={"submit"}
                     onClick={createBread}
-                >
-                    {" "}
-                    add bread{" "}
-                </button>
+                />
             </form>
         </>
     );
