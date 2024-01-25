@@ -26,9 +26,9 @@ function App() {
             </nav>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home />}></Route>
-                    <Route path="/viewAll" element={<View />}></Route>
-                    <Route path="/create" element={<Create />}></Route>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/viewAll" element={<View />} />
+                    <Route path="/create" element={<Create />} />
                 </Routes>
             </Router>
             <footer>

@@ -5,6 +5,8 @@ import Home from "../pages/Home";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// ADD ACTUAL LINKS TO NAV ITEMS
+
 const Navbar = () => {
     const navItems = [
         { label: "Breads", href: "/viewAll" },
