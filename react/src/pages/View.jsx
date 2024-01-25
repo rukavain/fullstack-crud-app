@@ -12,7 +12,7 @@ const View = () => {
     }, []);
 
     return (
-        <div>
+        <div className="flex justify-start items-center flex-col my-4">
             <h1>List of breads!!</h1>
             {breads.map((bread, index) => (
                 <div className="my-5" key={index}>
@@ -22,7 +22,7 @@ const View = () => {
                     <h1>Stocks: {bread.stocks}</h1>
                     <img
                         className="h-48"
-                        src={`http://localhost:8000/${bread.image}`} //idk this how u render an image from json/array
+                        src={`http://localhost:8000/${bread.image}`} //idk this how u render an image from an upload file json/array
                         alt=""
                     />
                     {console.log(bread.image)}

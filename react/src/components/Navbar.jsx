@@ -1,8 +1,4 @@
 import React from "react";
-import Create from "../pages/Create";
-import View from "../pages/View";
-import Home from "../pages/Home";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 // ADD ACTUAL LINKS TO NAV ITEMS
@@ -19,16 +15,21 @@ const Navbar = () => {
     return (
         <>
             <nav className=" flex justify-between items-center w-screen max-w-screen-2xl px-4 py-4">
+                <Link to={"/"}>
+                    <h1 className="font-bold text-4xl hover:text-slate-400 transition">
+                        LOGO
+                    </h1>
+                </Link>
                 <div>
-                    <h1 className="font-bold text-4xl">LOGO</h1>
-                </div>
-                <div>
-                    <ul className="flex gap-4 justify-center items-center">
+                    <ul className="flex gap-4 justify-center items-center max-md:hidden">
                         {navItems.map((item, index) => (
-                            <li href={item.href} key={index}>
-                                <h1 className="text-slate hover:font-bold hover:text-italic cursor-pointer transition-all">
+                            <li key={index}>
+                                <Link
+                                    to={item.href}
+                                    className="text-slate hover:font-bold hover:text-italic cursor-pointer transition-all"
+                                >
                                     {item.label}
-                                </h1>
+                                </Link>
                             </li>
                         ))}
                     </ul>

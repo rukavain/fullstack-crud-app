@@ -21,16 +21,18 @@ function App() {
 
     return (
         <>
-            <nav className="flex justify-center items-center shadow-lg z-10 bg-white ">
-                <Navbar />
-            </nav>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/viewAll" element={<View />} />
-                    <Route path="/create" element={<Create />} />
-                </Routes>
-            </Router>
+            <main className="min-h-screen">
+                <Router>
+                    <nav className="flex justify-center items-center shadow-lg z-10 bg-white ">
+                        <Navbar />
+                    </nav>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/viewAll" element={<View />} />
+                        <Route path="/create" element={<Create />} />
+                    </Routes>
+                </Router>
+            </main>
             <footer>
                 <Footer />
             </footer>
