@@ -1,10 +1,26 @@
 import React from "react";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Footer = () => {
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+    }, []);
+
     return (
         <section className="mt-auto flex gap-10 flex-col justify-center items-center bg-gray-900 text-slate-50 py-20">
-            <h1 className="text-5xl font-bold">Get in touch</h1>
-            <div className="flex flex-col justify-center items-center gap-2">
+            <h1
+                data-aos="fade-down"
+                className="text-5xl max-md:text-4xl font-bold"
+            >
+                Get in touch
+            </h1>
+            <div
+                data-aos="fade-down"
+                className="flex flex-col justify-center items-center gap-2"
+            >
                 <h1 className="text-md font-bold flex justify-center items-center">
                     hello@ivan.dev{" "}
                     <span>
@@ -25,7 +41,7 @@ const Footer = () => {
                 </h1>
 
                 <p className="text-xs">
-                    51 Primo Cruz, Mandaluyong City, Philippines 1550
+                    49 Sample Street, Sample City State, Country 404-Status
                 </p>
             </div>
             <p className="text-xs">Privacy Policy</p>
@@ -79,6 +95,15 @@ const Footer = () => {
                         </svg>
                     </p>
                 </div>
+                <p className="text-xs mt-4">
+                    footer inspired by{" "}
+                    <a
+                        className="font-semibold hover:underline transition"
+                        href="https://www.base-404.com/"
+                    >
+                        base-404
+                    </a>{" "}
+                </p>
                 <p className="text-xs mt-4">&copy; ivan.dev 2024</p>
             </div>
         </section>

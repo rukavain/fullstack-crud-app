@@ -34,6 +34,15 @@ const Navbar = () => {
                         ))}
                     </ul>
                 </div>
+                <div className="flex gap-2 text-sm">
+                    <h1 className="cursor-pointer hover:font-bold transition-all">
+                        Login
+                    </h1>
+                    <p> | </p>
+                    <h1 className="cursor-pointer hover:font-bold transition-all">
+                        Signup
+                    </h1>
+                </div>
             </nav>
         </>
     );
