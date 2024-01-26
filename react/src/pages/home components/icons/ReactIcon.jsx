@@ -5,6 +5,7 @@ const ReactIcon = () => {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="70"
+            className="max-md:w-12"
             fill="none"
             viewBox="0 0 256 256"
         >

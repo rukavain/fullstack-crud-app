@@ -40,7 +40,7 @@ const Footer = () => {
                     </span>
                 </h1>
 
-                <p className="text-xs">
+                <p className="text-xs text-center px-4">
                     49 Sample Street, Sample City State, Country 404-Status
                 </p>
             </div>

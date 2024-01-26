@@ -4,6 +4,7 @@ const Javascript = () => {
     return (
         <svg
             width="70"
+            className="max-md:w-12"
             viewBox="0 0 256 256"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

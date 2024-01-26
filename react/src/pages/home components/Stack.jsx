@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Css from "./icons/Css.jsx";
 import Html from "./icons/Html.jsx";
 import Javascript from "./icons/Javascript.jsx";
@@ -10,6 +10,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Stack = () => {
+    const [stack, setStack] = useState(false);
+
     useEffect(() => {
         AOS.init();
         AOS.refresh();
@@ -17,28 +19,35 @@ const Stack = () => {
 
     return (
         <>
-            <section className="flex gap-8 flex-col justify-center items-center max-w-5xl p-12 my-8 mx-12 bg-white rounded-md shadow-md">
+            <section className="flex gap-8 flex-col justify-center items-center py-12 px-12 my-8 mx-8 bg-white rounded-md shadow-md">
                 <div
                     data-aos="fade-right"
                     className=" max-w-7xl flex flex-col gap-4"
                 >
                     <h1 className="max-md:text-4xl text-center text-5xl font-bold">
-                        Technology Stack Used
+                        Technology{" "}
+                        <span
+                            onClick={() => setStack(!stack)}
+                            className="hover:text-stone-500 transition cursor-pointer"
+                        >
+                            {stack ? <h1>Queue</h1> : <h1>Stack</h1>}
+                        </span>{" "}
+                        Used
                     </h1>
                 </div>
-                <p
-                    data-aos="fade-right"
-                    className="max-w-xl text-sm text-center"
-                >
+                <p className="max-w-xl text-sm text-center">
                     The following technology stack are used because of the
                     convenience they provide in the development.
                 </p>
                 <div className="flex flex-wrap gap-12 max-w-xl justify-center items-center">
                     <div className="flex flex-col justify-center items-center gap-4">
                         <h1 className="text-2xl font-bold">Front-end</h1>{" "}
-                        <div className="flex flex-wrap justify-center items-center gap-4">
+                        <div
+                            className={`flex flex-wrap ${
+                                stack && "flex-col"
+                            } justify-center items-center gap-4 transition`}
+                        >
                             <span className="hover:opacity-80 transition cursor-pointer">
-                                {" "}
                                 <Html />
                             </span>
                             <span
@@ -47,7 +56,6 @@ const Stack = () => {
                                 {" "}
                                 <Css />
                             </span>
-
                             <span className="hover:opacity-80 transition cursor-pointer">
                                 {" "}
                                 <Javascript />
@@ -62,9 +70,11 @@ const Stack = () => {
                             </span>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-center items-center gap-4">
+                    <div
+                        className={`flex flex-col justify-center items-center gap-4`}
+                    >
                         <h1 className="text-2xl font-bold">Back-end</h1>
-                        <span className="flex gap-4">
+                        <span className={`flex ${stack && "flex-col"} gap-4`}>
                             <span className="hover:opacity-80 transition cursor-pointer">
                                 {" "}
                                 <Laravel />
