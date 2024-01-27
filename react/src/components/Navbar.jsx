@@ -18,7 +18,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className=" flex justify-between items-center w-screen max-w-screen-2xl px-4 py-4 sticky">
+            <nav className=" flex justify-between items-center w-screen max-w-screen-2xl px-8 py-4 sticky">
                 <Link to={"/"}>
                     <h1 className="font-bold text-4xl hover:text-slate-400 transition">
                         LOGO
@@ -41,7 +41,7 @@ const Navbar = () => {
                         {" "}
                         <Hamburger onClick={handleHidden} />{" "}
                         <ul
-                            className={`absolute top-16 bg-white shadow-md px-12 xl:hidden w-full text-center ${
+                            className={`absolute top-16 bg-white shadow-md px-12 md:hidden lg:hidden xl:hidden w-full text-center ${
                                 hidden
                                     ? "flex flex-col gap-5 text-lg font-semibold py-2"
                                     : "hidden"

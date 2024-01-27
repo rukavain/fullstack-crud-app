@@ -25,3 +25,5 @@ Route::get('/breads', [BreadController::class, 'index']);
 Route::post('/breads', [BreadController::class, 'store']);
 Route::get('/breads/{bread}', [BreadController::class, 'show']);
 Route::delete('/breads/{bread}', [BreadController::class, 'destroy']);
+Route::put('/breads/{bread}', [BreadController::class, 'update']);
+

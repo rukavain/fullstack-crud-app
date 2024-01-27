@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Button from "../components/Button";
 import SuccessMessage from "../components/SuccessMessage";
 
@@ -8,17 +8,22 @@ const ViewBread = () => {
     const { id } = useParams();
     const [bread, setBread] = useState({});
     const [delMessage, setDelMessage] = useState("");
-    const [page, setPage] = useState(`http://localhost:8000/api/breads/${id}`);
+    const [isDeleted, setIsDeleted] = useState(false);
+    const [page, setPage] = useState(false);
 
     useEffect(() => {
         axios
             .get(`http://localhost:8000/api/breads/${id}`)
             .then((response) => {
                 console.log(response.data);
-                setPage(`http://localhost:8000/api/breads/${id}`);
                 setBread(response.data);
+
             })
-            .catch((error) => console.error("fix da code plz", error));
+            .catch((error) => {
+                console.error("fix da code plz", error)
+                setDelMessage("This item is already deleted.")
+                setIsDeleted(true);
+            });
     }, [id]);
 
     const deleteItem = () => {
@@ -27,7 +32,8 @@ const ViewBread = () => {
             .then((response) => {
                 console.log(response.data);
                 setDelMessage("Successfully Deleted");
-                setPage(`http://localhost:8000/api/breads`);
+                setPage(true);
+                setIsDeleted(true);
             })
             .catch((error) => {
                 console.log("error deleting", error);
@@ -36,8 +42,17 @@ const ViewBread = () => {
 
     return (
         <>
-            {deleteItem ? (
+            {isDeleted ? (
+                <>
+                <div className="flex justify-center items-center flex-col my-12 gap-4">
                 <SuccessMessage message={delMessage} />
+                <Link to="/">
+                    <Button name="Go back to dashboard" />
+                </Link>
+                </div>
+
+                </>
+
             ) : (
                 (<div className="flex flex-col">
                     <h1>Title: {bread.title}</h1>
@@ -54,7 +69,7 @@ const ViewBread = () => {
 
                         <Button onClick={deleteItem} name={"Delete"} />
                     </span>
-                </div>)()
+                </div>)
             )}
         </>
     );

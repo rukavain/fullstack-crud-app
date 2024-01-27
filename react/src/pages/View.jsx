@@ -65,7 +65,7 @@ const View = () => {
                                         </h1>
                                         <h1>Stocks: {bread.stocks}</h1>
 
-                                        // TUMATAE AKO WAIT ALNG
+                                        // TUMATAE AKO WAIT ALNG1
                                     </div> */}
                                     <div className="flex gap-4 mt-11">
                                         <Button
