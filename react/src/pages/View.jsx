@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import Button from "../components/Button.jsx";
 import { Link, useParams } from "react-router-dom";
+import Modal from "react-modal";
 
 const View = () => {
     const { id } = useParams();
@@ -11,6 +12,15 @@ const View = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [confirmationModal, setConfirmationModal] = useState(false);
+    const [delMessage, setDelMessage] = useState("");
+    const [selectedBread, setSelectedBread] = useState(null);
+
+    const openConfirmationModal = (bread) => {
+        setConfirmationModal(true);
+        setSelectedBread(bread);
+    };
+    const closeConfirmationModal = () => setConfirmationModal(false);
 
     useEffect(() => {
         axios
@@ -23,16 +33,19 @@ const View = () => {
             .catch((error) => console.error("ayaw ng code mo!", error));
     }, [currentPage]);
 
-    const deleteItem = ({ breadId }) => {
+    const deleteItem = (breadId) => {
         axios
-            .delete(`http:localhost:8000/api/breads/${breadId}`)
+            .delete(`http://localhost:8000/api/breads/${breadId}`)
             .then((response) => {
                 console.log(response.data);
                 setBreads(breads.filter((bread) => bread.id !== breadId));
+                setDelMessage("Successfully Deleted");
             })
             .catch((error) => {
                 console.log("error deleting", error);
             });
+
+        closeConfirmationModal();
     };
 
     return (
@@ -40,7 +53,6 @@ const View = () => {
             <h1 className="font-bold text-5xl text-center my-8 max-md:text-4xl">
                 List of breads
             </h1>
-
             {isLoading ? (
                 <Loading />
             ) : (
@@ -51,6 +63,35 @@ const View = () => {
                                 className="flex max-md:max-w-[70vw] max-md:px-4 max-md:flex-wrap my-8 gap-8 max-w-xl hover:shadow-2xl hover:bg-slate hover:border-slate-600 transition-all bg-white justify-around items-start py-4 px-8 rounded-md shadow-md"
                                 key={index}
                             >
+                                <Modal
+                                    isOpen={confirmationModal}
+                                    onRequestClose={closeConfirmationModal}
+                                    contentLabel="Confirm Delete"
+                                    // className="absolute mx-auto px-auto max-w-md bg-white border-2 border-slate-700 rounded-md"
+                                >
+                                    <div className="flex flex-col my-6 flex-1 gap-10 justify-center items-center">
+                                        <h2 className="text-3xl">
+                                            Are you sure you want to delete this
+                                            item?
+                                        </h2>
+                                        <div className="flex justify-center items-center gap-4">
+                                            <button
+                                                className="py-3 px-6 rounded-md border border-slate-800 font-semibold text-sm hover:bg-slate-800 hover:text-white transition"
+                                                onClick={() =>
+                                                    deleteItem(bread.id)
+                                                }
+                                            >
+                                                Yes, Delete
+                                            </button>
+                                            <button
+                                                className="py-3 px-6 rounded-md border border-slate-800 font-semibold text-sm hover:bg-slate-800 hover:text-white transition"
+                                                onClick={closeConfirmationModal}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Modal>
                                 <div className="flex flex-col justify-between min-h-full">
                                     <div>
                                         <h1 className="font-semibold text-3xl my-4">
@@ -68,20 +109,18 @@ const View = () => {
                                         // TUMATAE AKO WAIT ALNG1
                                     </div> */}
                                     <div className="flex gap-4 mt-11">
-                                        <Button
+                                        {/* <Button
                                             name={"Purchase"}
                                             bg={`green`}
-                                        />
+                                        /> */}
                                         <Link to={`/view/${bread.id}`}>
-                                            <Button
-                                                name={"Learn more"}
-                                                className="hover:bg-green-700"
-                                            />{" "}
+                                            <Button name={"Learn more"} />{" "}
                                         </Link>
                                         <Button
-                                            onClick={() => deleteItem(bread.id)}
+                                            onClick={() =>
+                                                openConfirmationModal(bread)
+                                            }
                                             name={"DUH LIT"}
-                                            className="hover:bg-green-700"
                                         />{" "}
                                     </div>
                                 </div>
@@ -92,6 +131,8 @@ const View = () => {
                                 />
                             </div>
                         ))}
+                        {/* Confirmation Modal */}
+
                         {/* Pagination */}
                         <div className="my-2 py-2 bg-white shadow-md rounded-md px-5 flex justify-around items-center w-full max-w-xl">
                             <button

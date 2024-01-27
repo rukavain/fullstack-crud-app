@@ -36,9 +36,10 @@ const Stack = () => {
                     </h1>
                 </div>
                 <p className="max-w-xl text-sm text-center">
-                    The following technology stack are used because of the
+                    The following technology stack is used because of the
                     convenience they provide in the development.
                 </p>
+
                 <div className="flex flex-wrap gap-12 max-w-xl justify-center items-center">
                     <div className="flex flex-col justify-center items-center gap-4">
                         <h1 className="text-2xl font-bold">Front-end</h1>{" "}
