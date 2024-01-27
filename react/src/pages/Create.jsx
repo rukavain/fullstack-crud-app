@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Input from "../components/Input.jsx";
 import Button from "../components/Button.jsx";
+import { Link } from "react-router-dom";
 
 const CreateBreadForm = () => {
     const [title, setTitle] = useState("");
@@ -93,7 +94,9 @@ const CreateBreadForm = () => {
                 <div className="flex flex-col justify-center items-start shadow-md rounded-md py-2 px-2 mb-4">
                     <input type="file" onChange={handleFileChange} />
                 </div>
-
+                <Link to="/">
+                    <Button type={"button"} name={"Go back"} />
+                </Link>
                 <Button type={"submit"} name={"Submit"} />
             </form>
         </div>

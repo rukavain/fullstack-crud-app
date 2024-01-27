@@ -45,7 +45,7 @@ const Navbar = () => {
                                 hidden
                                     ? "flex flex-col gap-5 text-lg font-semibold py-2"
                                     : "hidden"
-                            } md:block z-20`}
+                            }  z-20`}
                         >
                             {navItems.map((item) => (
                                 <li key={item.label}>

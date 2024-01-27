@@ -6,19 +6,9 @@ import Home from "./pages/Home";
 import View from "./pages/View";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ViewBread from "./pages/ViewBread";
 
 function App() {
-    const [breads, setBreads] = useState("");
-
-    useEffect(() => {
-        axios
-            .get("http://localhost:8000/api/breads")
-            .then((response) => {
-                setBreads(response.data.message);
-            })
-            .catch((error) => console.error("shiehs error par", error));
-    }, []);
-
     return (
         <>
             <main className="min-h-screen">
@@ -30,6 +20,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/viewAll" element={<View />} />
                         <Route path="/create" element={<Create />} />
+                        <Route path="/view/:id" element={<ViewBread />} />
                     </Routes>
                 </Router>
             </main>

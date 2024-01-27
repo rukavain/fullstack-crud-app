@@ -13,7 +13,7 @@ class BreadController extends Controller
      */
     public function index()
     {
-        $breads = Bread::all();
+        $breads = Bread::orderBy('created_at', 'DESC')->paginate(6);
 
         return response()->json($breads);
     }
