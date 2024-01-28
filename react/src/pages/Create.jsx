@@ -16,6 +16,15 @@ const CreateBreadForm = () => {
         setImage(e.target.files[0]);
     };
 
+    const resetFields = () => {
+        setDescription("");
+        setImage(null);
+        setPrice("");
+        setStocks("");
+        setSuccessMessage("");
+        setTitle("");
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -39,6 +48,7 @@ const CreateBreadForm = () => {
 
             console.log(response.data);
             setSuccessMessage("Successfully added.");
+            resetFields();
             // Handle success, reset form, show success message, etc.
         } catch (error) {
             console.error("Error creating bread:", error);
@@ -48,58 +58,66 @@ const CreateBreadForm = () => {
     };
 
     return (
-        <div className="flex justify-center items-center my-8">
-            <form
-                className="flex flex-col bg-white px-8 py-4 rounded-md shadow-md"
-                onSubmit={handleSubmit}
-            >
-                <h1 className="text-4xl font-bold my-6">Add bread</h1>
-                {successMessage && (
-                    <h1
-                        onClick={() => setSuccessMessage("")}
-                        className="bg-slate-100 py-2 px-4 rounded-md cursor-pointer"
+        <>
+            {successMessage ? (
+                <>
+                    <div className="flex flex-col justify-center items-center my-5">
+                        <div className="flex gap-4 flex-col max-w-xl justify-center items-center my-5">
+                            <h1
+                                onClick={() => setSuccessMessage("")}
+                                className="bg-white shadow-md py-4 px-8 rounded-md cursor-pointer"
+                            >
+                                {successMessage}
+                            </h1>
+                            <Link to="/viewAll">
+                                <Button name={"View List"} />
+                            </Link>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <div className="flex justify-center items-center my-8">
+                    <form
+                        className="flex flex-col bg-white px-8 py-4 rounded-md shadow-md"
+                        onSubmit={handleSubmit}
                     >
-                        {successMessage}
-                    </h1>
-                )}
-
-                <Input
-                    type={"text"}
-                    label={"Title"}
-                    value={title}
-                    onChangeValue={setTitle}
-                />
-
-                <Input
-                    type={"text"}
-                    label={"Description"}
-                    value={description}
-                    onChangeValue={setDescription}
-                />
-
-                <Input
-                    type={"number"}
-                    label={"Price"}
-                    value={price}
-                    onChangeValue={setPrice}
-                />
-
-                <Input
-                    type={"number"}
-                    label={"Stocks"}
-                    value={stocks}
-                    onChangeValue={setStocks}
-                />
-                <label className="font-semibold mt-4">Image:</label>
-                <div className="flex flex-col justify-center items-start shadow-md rounded-md py-2 px-2 mb-4">
-                    <input type="file" onChange={handleFileChange} />
+                        <h1 className="text-4xl font-bold my-6">Add bread</h1>{" "}
+                        <Input
+                            type={"text"}
+                            label={"Title"}
+                            value={title}
+                            onChangeValue={setTitle}
+                        />
+                        <Input
+                            type={"text"}
+                            label={"Description"}
+                            value={description}
+                            onChangeValue={setDescription}
+                        />
+                        <Input
+                            type={"number"}
+                            label={"Price"}
+                            value={price}
+                            onChangeValue={setPrice}
+                        />
+                        <Input
+                            type={"number"}
+                            label={"Stocks"}
+                            value={stocks}
+                            onChangeValue={setStocks}
+                        />
+                        <label className="font-semibold mt-4">Image:</label>
+                        <div className="flex flex-col justify-center items-start shadow-md rounded-md py-2 px-2 mb-4">
+                            <input type="file" onChange={handleFileChange} />
+                        </div>
+                        <Link to="/">
+                            <Button type={"button"} name={"Go back"} />
+                        </Link>
+                        <Button type={"submit"} name={"Submit"} />
+                    </form>
                 </div>
-                <Link to="/">
-                    <Button type={"button"} name={"Go back"} />
-                </Link>
-                <Button type={"submit"} name={"Submit"} />
-            </form>
-        </div>
+            )}
+        </>
     );
 };
 

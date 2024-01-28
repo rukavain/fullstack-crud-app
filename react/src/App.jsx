@@ -11,7 +11,7 @@ import ViewBread from "./pages/ViewBread";
 function App() {
     return (
         <>
-            <main className="min-h-screen">
+            <main className=" dark:bg-slate-900 min-h-screen">
                 <Router>
                     <nav className="flex justify-center items-center shadow-lg z-10 bg-white ">
                         <Navbar />

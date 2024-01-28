@@ -1,13 +1,6 @@
 import React from "react";
 
-const Input = ({
-    label,
-    type,
-    value,
-    placeholder,
-    onChangeValue,
-    onChangeImage,
-}) => {
+const Input = ({ label, type, value, placeholder, onChangeValue }) => {
     return (
         <>
             <div className="my-3">
