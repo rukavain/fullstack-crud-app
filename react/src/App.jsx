@@ -7,6 +7,7 @@ import View from "./pages/View";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ViewBread from "./pages/ViewBread";
+import Update from "./pages/Update";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/viewAll" element={<View />} />
                         <Route path="/create" element={<Create />} />
                         <Route path="/view/:id" element={<ViewBread />} />
+                        <Route path="/update/:id" element={<Update />} />
                     </Routes>
                 </Router>
             </main>
