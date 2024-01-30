@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ViewBread from "./pages/ViewBread";
 import Update from "./pages/Update";
+import Contact from "./pages/Contact";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/viewAll" element={<View />} />
                         <Route path="/create" element={<Create />} />
+                        <Route path="/contact" element={<Contact />} />
                         <Route path="/view/:id" element={<ViewBread />} />
                         <Route path="/update/:id" element={<Update />} />
                     </Routes>

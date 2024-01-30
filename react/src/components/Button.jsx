@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ name, onClick, bg, type }) => {
+const Button = ({ name, onClick, type }) => {
     return (
         <button
             type={type}

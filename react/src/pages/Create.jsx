@@ -47,6 +47,7 @@ const CreateBreadForm = () => {
             );
 
             console.log(response.data);
+            setSuccessMessage(true);
             setSuccessMessage("Successfully added.");
             resetFields();
             // Handle success, reset form, show success message, etc.

@@ -9,7 +9,6 @@ const ViewBread = () => {
     const [bread, setBread] = useState({});
     const [delMessage, setDelMessage] = useState("");
     const [isDeleted, setIsDeleted] = useState(false);
-    const [page, setPage] = useState(false);
 
     useEffect(() => {
         axios
@@ -17,11 +16,10 @@ const ViewBread = () => {
             .then((response) => {
                 console.log(response.data);
                 setBread(response.data);
-
             })
             .catch((error) => {
-                console.error("fix da code plz", error)
-                setDelMessage("This item is already deleted.")
+                console.error("fix da code plz", error);
+                setDelMessage("This item is already deleted.");
                 setIsDeleted(true);
             });
     }, [id]);
@@ -31,8 +29,9 @@ const ViewBread = () => {
             .delete(`http://localhost:8000/api/breads/${id}`)
             .then((response) => {
                 console.log(response.data);
+
                 setDelMessage("Successfully Deleted");
-                setPage(true);
+
                 setIsDeleted(true);
             })
             .catch((error) => {
@@ -44,17 +43,15 @@ const ViewBread = () => {
         <>
             {isDeleted ? (
                 <>
-                <div className="flex justify-center items-center flex-col my-12 gap-4">
-                <SuccessMessage message={delMessage} />
-                <Link to="/">
-                    <Button name="Go back to dashboard" />
-                </Link>
-                </div>
-
+                    <div className="flex justify-center items-center flex-col my-12 gap-4">
+                        <SuccessMessage message={delMessage} />
+                        <Link to="/">
+                            <Button name="Go back to dashboard" />
+                        </Link>
+                    </div>
                 </>
-
             ) : (
-                (<div className="flex flex-col">
+                <div className="flex flex-col">
                     <h1>Title: {bread.title}</h1>
                     <h1>Description: {bread.description}</h1>
                     <h1>Stocks: {bread.stocks}</h1>
@@ -69,7 +66,7 @@ const ViewBread = () => {
 
                         <Button onClick={deleteItem} name={"Delete"} />
                     </span>
-                </div>)
+                </div>
             )}
         </>
     );
