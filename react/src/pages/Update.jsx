@@ -24,14 +24,18 @@ const Update = () => {
                 setImage(`http://localhost:8000/${response.data.image}`);
             })
             .catch((error) => {
-                console.error("error pls fix.");
+                console.error("error pls fix.", error);
             });
     }, [id]);
 
     return (
         <>
             <div>
-                <div></div>
+                <h1>Title: {title} </h1>
+                <h1>Description: {description} </h1>
+                <h1>Stocks: {stocks} </h1>
+                <h1>Price: {price} </h1>
+                <img src={image} alt="" />
             </div>
         </>
     );

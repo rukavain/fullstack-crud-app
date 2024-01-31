@@ -11,7 +11,7 @@ const Landing = () => {
         AOS.refresh();
     }, []);
     return (
-        <div className="dark:bg-slate-900 flex max-lg:flex-wrap justify-around items-center max-w-5xl rounded-md shadow-md bg-white my-4 mx-12 py-4 px-12 max-md:px-4 max-md:mx-4 ">
+        <div className=" flex max-lg:flex-wrap justify-around items-center max-w-5xl rounded-md shadow-md bg-white my-4 mx-12 py-4 px-12 max-md:px-4 max-md:mx-4 ">
             <div
                 data-aos="fade-down"
                 className="px-6 mx-6 max-md:mx-1 max-md:px-1"
