@@ -57,7 +57,7 @@ const View = () => {
                 <Loading />
             ) : (
                 <div className="flex justify-start items-center">
-                    <div className="flex flex-wrap max-w-6xl justify-center gap-7 items-center">
+                    <div className="flex flex-wrap max-w-max justify-center gap-7 items-center">
                         {breads.map((bread, index) => (
                             <div
                                 className="flex max-md:max-w-[70vw] max-md:px-4 max-md:flex-wrap my-8 gap-8 max-w-xl hover:shadow-2xl hover:bg-slate hover:border-slate-600 transition-all bg-white justify-around items-start py-4 px-8 rounded-md shadow-md"
@@ -108,13 +108,16 @@ const View = () => {
 
                                         // TUMATAE AKO WAIT ALNG1
                                     </div> */}
-                                    <div className="flex gap-4 mt-11">
+                                    <div className="flex gap-4 mt-11 w-max">
                                         {/* <Button
                                             name={"Purchase"}
                                             bg={`green`}
                                         /> */}
                                         <Link to={`/view/${bread.id}`}>
                                             <Button name={"Learn more"} />{" "}
+                                        </Link>
+                                        <Link to={`/update/${bread.id}`}>
+                                            <Button name={"Update"} />{" "}
                                         </Link>
                                         <Button
                                             onClick={() =>
