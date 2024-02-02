@@ -58,17 +58,30 @@ class BreadController extends Controller
      */
     public function update(Request $request, Bread $bread)
     {
-        request()->validate([
-            'price' => 'required|numeric|min:1|max:5',
-            'title' => 'required|min:3|max:255',
-            'description' => 'required|min:12|max:455',
-            'stocks' => 'required|numeric'
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|integer|min:0',
+            'stocks' => 'required|integer|min:0',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048|nullable',
         ]);
 
-        $bread->update($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['image'] = 'images/' . $imageName;
+        } else {
+            unset($data['image']); // Remove image key if not present in request
+        }
+
+        $bread->update($data);
 
         return response()->json(['info' => 'updated successfully.']);
     }
+
 
     /**
      * Remove the specified resource from storage.

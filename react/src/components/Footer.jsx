@@ -98,6 +98,7 @@ const Footer = () => {
                 <p className="text-xs mt-4">
                     footer inspired by{" "}
                     <a
+                        target="blank"
                         className="font-semibold hover:underline transition"
                         href="https://www.base-404.com/"
                     >
