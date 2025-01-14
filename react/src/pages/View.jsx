@@ -24,7 +24,9 @@ const View = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/breads?page=${currentPage}`)
+            .get(
+                `https://fullstack-crud-app-react-laravel.onrender/api/breads/?page=${currentPage}`
+            )
             .then((response) => {
                 setBreads(response.data.data);
                 setTotalPages(response.data.last_page);
@@ -35,7 +37,9 @@ const View = () => {
 
     const deleteItem = (breadId) => {
         axios
-            .delete(`http://localhost:8000/api/breads/${breadId}`)
+            .delete(
+                `https://fullstack-crud-app-react-laravel.onrender/api/breads/${breadId}`
+            )
             .then((response) => {
                 console.log(response.data);
                 setBreads(breads.filter((bread) => bread.id !== breadId));

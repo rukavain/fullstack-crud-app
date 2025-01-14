@@ -15,7 +15,10 @@ const Update = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/breads/${id}`)
+            .get(
+                ` https://fullstack-crud-app-react-laravel.onrender/api/breads/${id}.com`
+            )
+
             .then((response) => {
                 console.log(response.data);
                 setBread(response.data);
@@ -23,7 +26,9 @@ const Update = () => {
                 setDescription(response.data.description);
                 setStocks(response.data.stocks);
                 setPrice(response.data.price);
-                setImage(`http://localhost:8000/${response.data.image}`);
+                setImage(
+                    `https://fullstack-crud-app-react-laravel.onrender/api/breads/${response.data.image}`
+                );
             })
             .catch((error) => {
                 console.error("error pls fix.", error);

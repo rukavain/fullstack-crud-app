@@ -12,7 +12,9 @@ const ViewBread = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8000/api/breads/${id}`)
+            .get(
+                `https://fullstack-crud-app-react-laravel.onrender/api/breads/${id}`
+            )
             .then((response) => {
                 console.log(response.data);
                 setBread(response.data);
@@ -26,7 +28,9 @@ const ViewBread = () => {
 
     const deleteItem = () => {
         axios
-            .delete(`http://localhost:8000/api/breads/${id}`)
+            .delete(
+                `https://fullstack-crud-app-react-laravel.onrender/api/breads/${id}`
+            )
             .then((response) => {
                 console.log(response.data);
 
